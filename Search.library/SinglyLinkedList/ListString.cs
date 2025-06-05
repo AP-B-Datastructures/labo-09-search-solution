@@ -2,16 +2,16 @@ using System;
 
 namespace Search.library.SinglyLinkedList
 {
-    public class ListInt
+    public class ListString
     {
-        public NodeInt First { get; private set; }
-        public NodeInt Last  { get; private set; }
+        public NodeString First { get; private set; }
+        public NodeString Last  { get; private set; }
         public bool IsEmpty => this.First == null;
         public int Length { get; private set; }
 
-        public void Add(int value)
+        public void Add(string value)
         {
-            NodeInt newValue = new NodeInt(value);
+            NodeString newValue = new NodeString(value);
 
             if (this.IsEmpty)
                 this.First = newValue;
@@ -22,9 +22,9 @@ namespace Search.library.SinglyLinkedList
             this.Length++;
         }
 
-        public NodeInt Find(int value)
+        public NodeString Find(string value)
         {
-            NodeInt currentNode = this.First;
+            NodeString currentNode = this.First;
 
             while (currentNode != null && currentNode.Value != value)
             {
@@ -34,7 +34,7 @@ namespace Search.library.SinglyLinkedList
             return currentNode;
         }
 
-        public NodeInt Remove(int index)
+        public NodeString Remove(int index)
         {
             if (index < 0 || index >= this.Length)
             {
@@ -46,14 +46,14 @@ namespace Search.library.SinglyLinkedList
                 return RemoveFirst();
             }
 
-            NodeInt beforeIndex = this.First;
+            NodeString beforeIndex = this.First;
 
             for (int i = 1; i < index - 1; ++i)
             {
                 beforeIndex = beforeIndex.Next;
             }
 
-            NodeInt toRemove = beforeIndex.Next;
+            NodeString toRemove = beforeIndex.Next;
 
             beforeIndex.Next = beforeIndex.Next.Next;
 
@@ -61,7 +61,27 @@ namespace Search.library.SinglyLinkedList
             return toRemove;
         }
 
-        public NodeInt RemoveFirst()
+        public NodeString Remove(string value)
+        {
+            NodeString toRemove = Find(value);
+            NodeString beforeValue = First;
+            
+
+            while (beforeValue != null && beforeValue.Next != toRemove)
+            {
+                beforeValue = beforeValue.Next;
+            }
+
+            if (beforeValue == null)
+                return null;
+
+            beforeValue.Next = toRemove.Next;
+
+            this.Length--;
+            return toRemove;
+        }
+
+        public NodeString RemoveFirst()
         {
             if (this.IsEmpty)
             {
@@ -73,7 +93,7 @@ namespace Search.library.SinglyLinkedList
                 this.Last = null;
             }
 
-            NodeInt toRemove = this.First;
+            NodeString toRemove = this.First;
 
             this.First = this.First.Next;
 
@@ -81,7 +101,7 @@ namespace Search.library.SinglyLinkedList
             return toRemove;
         }
 
-        public NodeInt RemoveLast()
+        public NodeString RemoveLast()
         {
             return Remove(this.Length - 1);
         }
@@ -95,7 +115,7 @@ namespace Search.library.SinglyLinkedList
 
         public override string ToString()
         {
-            NodeInt node = this.First;
+            NodeString node = this.First;
 
             var result = "";
             while (node != null)

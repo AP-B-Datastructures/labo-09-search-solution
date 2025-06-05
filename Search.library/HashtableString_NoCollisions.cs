@@ -1,14 +1,16 @@
 using System;
+using Search.library.SinglyLinkedList;
 
 namespace Search.library
 {
     public class HashtableString_NoCollisions
     {
+        private ListString[] array;
         public int Length => throw new NotImplementedException();
 
         public HashtableString_NoCollisions(int size)
         {
-            throw new NotImplementedException();
+            array = new ListString[size]; 
         }
 
         public int Count(string value)
@@ -18,27 +20,45 @@ namespace Search.library
 
         public void Add(string value)
         {
-            throw new NotImplementedException();
+            var idx = CalcIndex(value);
+            if (array[idx] == null)
+                array[idx] = new ListString();  //make sure that the LL is created
+
+            array[idx].Add(value);
         }
 
         public void Remove(string value)
         {
-            throw new NotImplementedException();
+            var idx = CalcIndex(value);
+            array[idx].Remove(value);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < array.Length; i++)
+                if (array[i] != null)
+                    array[i].Clear();
         }
 
         public bool Contains(string value)
         {
-            throw new NotImplementedException();
+            var idx = CalcIndex(value);
+            if (array[idx] != null)
+                return array[idx].Find(value) != null;
+            return false;
+        }
+
+
+        private int CalcIndex(string text)
+        {
+            var hash = CalculateHash(text);
+
+            return Math.Abs(hash) % array.Length;
         }
 
         private int CalculateHash(string value)
         {
-            throw new NotImplementedException();
+            return value.GetHashCode();
         }
     }
 }

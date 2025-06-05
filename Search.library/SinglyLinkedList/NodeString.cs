@@ -2,19 +2,19 @@ using System;
 
 namespace Search.library.SinglyLinkedList
 {
-    public class NodeInt
+    public class NodeString
     {
-        public int Value { get; set; }
-        public NodeInt Next { get; set; }
+        public string Value { get; set; }
+        public NodeString Next { get; set; }
 
-        public NodeInt(int value = 0)
+        public NodeString(string value = "")
         {
             this.Value = value;
         }
 
         public override string ToString()
         {
-            return this.Value.ToString();
+            return this.Value;
         }
     }
 }

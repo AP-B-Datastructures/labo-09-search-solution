@@ -5,13 +5,27 @@ namespace Search.library
 {
     public class LinearSearchInt
     {
-        public static int SearchArray(int[] Array, int value)
+        public static int SearchArray(int[] array, int value)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == value)
+                    return i;
+            }
+            return -1;
         }
-        public static int SearchLinkedList(ListInt Array, int value)
+        public static NodeInt SearchLinkedList(ListInt list, int value)
         {
-            throw new NotImplementedException();
+            NodeInt node = list.First;
+            while (node != null)
+            {
+                if (node.Value == value)
+                {
+                    return node;
+                }
+                node = node.Next;
+            }
+            return null;
         }
     }
 }
